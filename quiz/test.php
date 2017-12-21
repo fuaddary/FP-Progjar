@@ -19,7 +19,7 @@
 
 		<!-- <h1 class="transparent index-headline">Lockedown Design: What Metal Band Are You?</h1> -->
 		
-		<form action="grade.php" method="post" id="quiz">
+		<form action="rank.php" method="post" id="quiz">
 		
 		<?php
 		/**

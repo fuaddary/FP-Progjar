@@ -2,6 +2,7 @@ import socket, select, sys, os, subprocess
 import ConfigParser
 from pathlib import Path
 from time import sleep
+import json
 import re
 
 
@@ -9,7 +10,7 @@ import re
 config = ConfigParser.RawConfigParser()   
 config.read('httpserver.conf')
 
-result = []
+result = {}
 
 server_address = ('0.0.0.0',config.getint('server','port'))
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -35,16 +36,20 @@ def kunci (post_string):
 	score = 0
 	for elements in post_string:
 		if elements == "question-1-answers=C":
-			score += 1
+			score += 20
 		elif elements == "question-2-answers=C":
-			score += 1
+			score += 20
 		elif elements == "question-3-answers=C":
-			score += 1
+			score += 20
 		elif elements == "question-4-answers=C":
-			score += 1
+			score += 20
 		elif elements == "question-5-answers=C":
-			score += 1
+			score += 20
 	return score
+
+def save_json(result):
+	with open('result.json', 'w') as outfile:
+	    json.dump(result, outfile)
 
 print 'Serve at %s port %s'%server_address
 try:
@@ -136,19 +141,20 @@ try:
 							response_data = '<meta http-equiv="refresh" content="0; url=http://10.151.36.137/quiz/test.php"/>'
 							content_length = len (response_data)
 							response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\nSet-Cookie: <username>=<'+str(name)+'>' + '\r\n\r\n'
-						if "grade.php" in request_header[0]:
+						if "rank.php" in request_header[0]:
 							print "request post grade.php"
 							cookie = findcookie(request_header)
 							print cookie
 							print "request_header--------------------------------------"
-							result.append([server_address,cookie,kunci(request_header[-1])])
-							print str(result)
-							response_data = str(result)
+							result [cookie] = kunci(request_header[-1])
+							save_json (result)
+							response_data = '<meta http-equiv="refresh" content="0; url=http://10.151.36.137/quiz/rank.php"/>'
 							content_length = len (response_data)
 							response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
 							sleep(3)
 						print response_header
 						sock.sendall(response_header + response_data)
+
 
 except KeyboardInterrupt:
 	server_socket.close()
