@@ -21,17 +21,7 @@
 		
 		<form action="rank.php" method="post" id="quiz">
 		
-		<?php
-		/**
-	         * Each <li> holds a question. Follow the same pattern if you want to add more questions.
-	         * If you add more questions, be sure to add more $answer variables in grade.php 
-	         * (See lines 26-30 in grade.php).
-	         * The important values here: name value on the rasio buttons for each answer, .fwrd class on labels.
-	         * You need the name value to store answers for grading.
-	         * In this demo, the frwd class controls question advancement through jQuery.
-	         */
-            ?>    
-            <ul id="test-questions">
+	        <ul id="test-questions">
                 
                 <li>
                     <div class="quiz-overlay"></div>
