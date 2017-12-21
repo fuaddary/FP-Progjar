@@ -404,7 +404,7 @@ h1 {
 }
 .index-sell, .index-headline {
   color: #1c2d37;
-  left: 465px;
+  left: 520px;
   top: 290px;
   text-align: center;
   width: 400px;
@@ -415,9 +415,9 @@ h1 {
   letter-spacing: 1px;
   text-shadow: 1px 1px 2px #fff;
   top: 195px;
-  max width: unset;
+  max-width: unset;
   max-width: 700px;
-  left: 465px;
+  left: 522px;
 }
 .transparent {
   color: transparent;
@@ -462,7 +462,7 @@ h1 {
 }
 .index-btn {
   height: 49px;
-  left: 540px;
+  left: 595px;
   padding: 9px 0 6px 0;
   position: absolute;
   top: 370px; /* 283 */

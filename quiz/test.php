@@ -206,7 +206,7 @@
            }(jQuery))
     </script>
      --><script>
-        
+        var startTime = new Date().getTime();
         var $mt = 0;
         window.onload = function timeout(){
 
@@ -215,6 +215,10 @@
                     $("#test-questions").css("margin-top", $mt); 
                     timeout();
                 },5000);
+                if(new Date().getTime() - startTime > 29000){
+                    var button = document.getElementById('submit-quiz');
+                    button.form.submit();
+                }
         };
     </script>
 
