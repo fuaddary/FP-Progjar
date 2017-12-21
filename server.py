@@ -65,21 +65,22 @@ try:
 				data = sock.recv(4096)
 				if data:
 					
-					print "start request --------------------"
-					print data
-					print "end request ----------------------"
 					grep_host = subprocess.Popen(["grep", 'Host'], shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 					grep_filtered, _ = grep_host.communicate(data)
 
-					# print grep_filtered[6:]
 					ip = grep_filtered[6:]
 
 					request_header = data.split('\r\n')
 					request_file = request_header[0].split()[1]
+					
+					print "------ REQUEST HEADER -------"
+					for elements in request_header:
+						print elements
+
 					if "GET" in request_header[0]:
-						print request_file
+						
 						file = Path(request_file[1:])
-						print "----- RESPONSE -----"
+						print "------ GET RESPONSE ------"
 						
 						if request_file == '/index.html' or request_file == '/':
 							f = open('index.html','r')
@@ -131,23 +132,19 @@ try:
 								content_length = len(response_data)
 								response_header = 'HTTP/1.1 404 Not Found\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
 						
+						print response_header
 						sock.sendall(response_header + response_data )
 						
-						print response_header
-						print "--------------------\r\n"
 					elif "POST" in request_header[0]:
-						print "ini request post----------------------------------------"
+						print "----- POST RESPONSE -----"
 						if "test.php" in request_header[0]:
 							name = (request_header[-1])
 							response_data = '<meta http-equiv="refresh" content="0; url=http://'+ ip +'/quiz/test.php"/>'
 							content_length = len (response_data)
 							response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\nSet-Cookie: <username>=<'+str(name)+'>' + '\r\n\r\n'
 						if "rank.php" in request_header[0]:
-							print "request post grade.php"
 							cookie = findcookie(request_header)
-							print "request_header--------------------------------------"
 							result [cookie] = kunci(request_header[-1])
-							#result_sort = sorted(result.items(), key=operator.itemgetter(1))
 							save_json (result)
 							response_data = '<meta http-equiv="refresh" content="0; url=http://'+ ip +'/quiz/rank.php"/>'
 							content_length = len (response_data)

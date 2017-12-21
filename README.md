@@ -3,7 +3,6 @@
 Pada FP progjar kali ini, kita akan membuat sebuah aplikasi kuis berbasis web menggunakan python socket. Adapun spesifikasi aplikasi tersebut adalah:
 
   - Menggunakan Python socket web server
-  ? Dapat membaca soal dari file (csv/txt)
   - Dapat menampilkan soal dari dalam setiap selang waktu tertentu
  
   
