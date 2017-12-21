@@ -1,5 +1,6 @@
 import socket, select, sys, os, subprocess
 import ConfigParser
+from pathlib import Path
 
 config = ConfigParser.RawConfigParser()   
 config.read('httpserver.conf')
@@ -33,9 +34,10 @@ try:
 
 					request_header = data.split('\r\n')
 					request_file = request_header[0].split()[1]
+					file = Path(request_file[1:])
 					
 					print "----- RESPONSE -----"
-					print request_file
+					print file
 
 					if request_file == '/index.html' or request_file == '/':
 						f = open('website/index.html','r')
@@ -44,6 +46,15 @@ try:
 						content_length = len(response_data)
 						response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
 					
+					elif request_file.endswith('.html'):
+						request_file = request_file[1:]
+						f = open(request_file,'r')
+						response_data = f.read()
+						f.close()
+						content_length = len(response_data)
+						response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
+
+
 					elif request_file.endswith('.css'):
 						request_file = request_file[1:]
 						f = open(request_file,'r')
@@ -51,7 +62,7 @@ try:
 						f.close()
 						content_length = len(response_data)
 						response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/css; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
-					
+
 					elif request_file == '/quiz.php':
 						request_file = request_file[1:]
 						f = open(request_file,'r')
@@ -72,8 +83,17 @@ try:
 						content_length = len(response_data)
 						response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
 
-					sock.sendall(response_header + response_data )
+					else :
+						request_file = request_file[1:]
+						if file.is_file():
+						# file exists:
+							f = open(request_file,'r')
+							response_data = f.read()
+							f.close()
+							content_length = len(response_data)
+							response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/css; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
 					
+					sock.sendall(response_header + response_data )
 					print response_header
 					print "--------------------\r\n"
 
