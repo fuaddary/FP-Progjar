@@ -4,6 +4,7 @@ import ConfigParser
 config = ConfigParser.RawConfigParser()   
 config.read('httpserver.conf')
 
+
 server_address = ('0.0.0.0',config.getint('server','port'))
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR,1)
@@ -40,9 +41,6 @@ try:
 						f = open('website/index.html','r')
 						response_data = f.read()
 						f.close()
-						# f = open('website/style.css','r')
-						# response_data = f.read()
-						# f.close() 
 						content_length = len(response_data)
 						response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
 					
@@ -53,8 +51,27 @@ try:
 						f.close()
 						content_length = len(response_data)
 						response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/css; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
-
 					
+					elif request_file == '/quiz.php':
+						request_file = request_file[1:]
+						f = open(request_file,'r')
+						response_data = f.read()
+						f.close()
+						content_length = len(response_data)
+						response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
+
+					elif request_file.endswith('.php'):
+
+						currdir = os.getcwd()
+						print currdir
+						print request_file
+						file = "php '"+request_file[1:]+"'"
+						print file
+						proc = subprocess.Popen(file, shell=True, stdout=subprocess.PIPE)
+						response_data = proc.stdout.read()
+						content_length = len(response_data)
+						response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
+
 					sock.sendall(response_header + response_data )
 					
 					print response_header
