@@ -7,7 +7,6 @@ import re
 import operator
 
 
-
 config = ConfigParser.RawConfigParser()   
 config.read('httpserver.conf')
 
@@ -30,7 +29,6 @@ def findcookie(request_header):
 			if m:
 			    found = m.group(1)
 			    return found
-			# found: 1234
 
 def kunci (post_string):
 	post_string = post_string.split("&")
@@ -90,7 +88,7 @@ try:
 							content_length = len(response_data)
 							response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
 						
-						elif request_file.endswith('.html'):
+						elif request_file.endswith('.html') and file.is_file() :
 							request_file = request_file[1:]
 							f = open(request_file,'r')
 							response_data = f.read()
@@ -98,7 +96,7 @@ try:
 							content_length = len(response_data)
 							response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
 
-						elif request_file.endswith('.css'):
+						elif request_file.endswith('.css') and file.is_file() :
 							request_file = request_file[1:]
 							f = open(request_file,'r')
 							response_data = f.read()
@@ -106,15 +104,7 @@ try:
 							content_length = len(response_data)
 							response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/css; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
 
-						elif request_file == '/quiz.php':
-							request_file = request_file[1:]
-							f = open(request_file,'r')
-							response_data = f.read()
-							f.close()
-							content_length = len(response_data)
-							response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
-
-						elif request_file.endswith('.php'):
+						elif request_file.endswith('.php') and file.is_file():
 							currdir = os.getcwd()
 							print currdir
 							print request_file
@@ -134,6 +124,12 @@ try:
 								f.close()
 								content_length = len(response_data)
 								response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
+							else :
+								f = open('404.html','r')
+								response_data = f.read()
+								f.close()
+								content_length = len(response_data)
+								response_header = 'HTTP/1.1 404 Not Found\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
 						
 						sock.sendall(response_header + response_data )
 						
@@ -149,7 +145,6 @@ try:
 						if "rank.php" in request_header[0]:
 							print "request post grade.php"
 							cookie = findcookie(request_header)
-							print cookie
 							print "request_header--------------------------------------"
 							result [cookie] = kunci(request_header[-1])
 							#result_sort = sorted(result.items(), key=operator.itemgetter(1))
