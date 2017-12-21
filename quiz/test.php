@@ -7,6 +7,7 @@
 	<title>What Metal Band Are You? Quiz</title>
 	
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/main.css"/>
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
 
 
@@ -209,7 +210,7 @@
         window.onload = function timeout(){
 
                 setTimeout(function(){
-                    $mt = $mt - 430;
+                    $mt = $mt - 500;
                     $("#test-questions").css("margin-top", $mt); 
                     timeout();
                 },5000)
