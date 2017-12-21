@@ -174,12 +174,6 @@ h1 {
   -ms-transition: all linear .35s;
   transition: all linear .35s;
 }
-.quiz-overlay, .result {
-  height: 359px; /* 359px */
-  position: absolute;
-  width: 552px;
-  z-index: -1;
-}
 .index .quiz-overlay, .quiz-overlay { 
   /* background: rgba(226,255,246,.52) url(../imgs/horns-up.png);  */
   background: rgba(226,255,246,.52);
@@ -397,7 +391,7 @@ body {
   max-width: 600px;
 }
 #page-wrap {
-  height: 750px;
+  height: 638px;
   margin: auto;
   overflow: hidden;
   position: relative;
@@ -410,18 +404,20 @@ h1 {
 }
 .index-sell, .index-headline {
   color: #1c2d37;
-  left: 100px;
-  margin: 0;
-  position: absolute;
+  left: 465px;
+  top: 290px;
   text-align: center;
   width: 400px;
 }
 .index-headline {
   font-size: 36px;
-  height: 0;
+  max-height: 250px;
   letter-spacing: 1px;
   text-shadow: 1px 1px 2px #fff;
-  top: 55px;
+  top: 195px;
+  max width: unset;
+  max-width: 700px;
+  left: 465px;
 }
 .transparent {
   color: transparent;
@@ -466,10 +462,10 @@ h1 {
 }
 .index-btn {
   height: 49px;
-  left: 168px;
+  left: 540px;
   padding: 9px 0 6px 0;
   position: absolute;
-  top: 267px; /* 283 */
+  top: 370px; /* 283 */
 }
 #replay {
   display: block;
@@ -542,7 +538,7 @@ h1 {
   transition: all linear .35s;
 }
 .quiz-overlay, .result {
-  height: 359px; /* 359px */
+  height: 335px; /* 359px */
   position: absolute;
   width: 552px;
   z-index: -1;
@@ -553,7 +549,9 @@ h1 {
   background-size: cover;
 }
 .index .quiz-overlay {
-  left: 24px;
+  position: relative;
+  left: 389px;
+  top: 160px;
 }
 #quiz ul li div.quiz-overlay { 
   margin: 0;
