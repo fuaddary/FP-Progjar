@@ -12,8 +12,8 @@
 		<form id="start-quiz" method="post" action="test.php">
             <div class="overlay index">
 		        <div class="quiz-overlay"></div>
-		        <h1 class="index-headline">What Metal Band Are You?</h1>
-		        <p class="index-sell">This personality quiz will reveal which iconic metal band you resemble most. </p>
+		        <h1 class="index-headline">Whats your name?</h1>
+		            <input type="text" class="index-sell" name="name"><br>
                 <input type="submit" id="submit" class="take-quiz-btn index-btn redglow" value="Take The Quiz" />
             </div>                        
 	    </form>
