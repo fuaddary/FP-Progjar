@@ -42,12 +42,13 @@ try:
 				input_socket.append(client_socket)
 			else:
 				data = sock.recv(4096)
-
 				if data:
 					
 					print "start request --------------------"
 					print data
 					print "end request ----------------------"
+					
+					
 
 					request_header = data.split('\r\n')
 					request_file = request_header[0].split()[1]
@@ -111,15 +112,25 @@ try:
 								response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
 						
 						sock.sendall(response_header + response_data )
+						
 						print response_header
 						print "--------------------\r\n"
 					elif "POST" in request_header[0]:
-						result.append([client_address,kunci(request_header[-1])])
-						print str(result)
-						response_data = str(result)
-						content_length = len (response_data)
-						response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
-						sleep(3)
+						print "ini request post----------------------------------------"
+						if "test.php" in request_header[0]:
+							server_address = (request_header[-1])
+							print server_address
+							response_data = '<meta http-equiv="refresh" content="0; url=http://10.151.36.137/quiz/test.php"/>'
+							content_length = len (response_data)
+							response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
+						if "grade.php" in request_header[0]:
+							print "request post grade.php"
+							result.append([server_address,kunci(request_header[-1])])
+							print str(result)
+							response_data = str(result)
+							content_length = len (response_data)
+							response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
+							sleep(3)
 						sock.sendall(response_header + response_data)
 
 
