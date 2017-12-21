@@ -4,6 +4,7 @@ from pathlib import Path
 from time import sleep
 import json
 import re
+import operator
 
 
 
@@ -48,8 +49,11 @@ def kunci (post_string):
 	return score
 
 def save_json(result):
+	sorted_result = {}
+	for key, value in sorted(result.iteritems(), key=lambda (k,v): (v,k)):
+		sorted_result[key] = value
 	with open('result.json', 'w') as outfile:
-	    json.dump(result, outfile)
+	    json.dump(sorted_result, outfile)
 
 print 'Serve at %s port %s'%server_address
 try:
@@ -148,6 +152,7 @@ try:
 							print cookie
 							print "request_header--------------------------------------"
 							result [cookie] = kunci(request_header[-1])
+							#result_sort = sorted(result.items(), key=operator.itemgetter(1))
 							save_json (result)
 							response_data = '<meta http-equiv="refresh" content="0; url=http://'+ ip +'/quiz/rank.php"/>'
 							content_length = len (response_data)
