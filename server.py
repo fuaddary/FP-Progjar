@@ -40,7 +40,7 @@ try:
 					print file
 
 					if request_file == '/index.html' or request_file == '/':
-						f = open('website/index.html','r')
+						f = open('index.html','r')
 						response_data = f.read()
 						f.close()
 						content_length = len(response_data)
@@ -91,7 +91,7 @@ try:
 							response_data = f.read()
 							f.close()
 							content_length = len(response_data)
-							response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/css; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
+							response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
 					
 					sock.sendall(response_header + response_data )
 					print response_header
