@@ -2081,8 +2081,10 @@ body {
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 50%;
-  height: 90%;
+  margin-bottom: 2cm;
+  margin-right: 2cm;
+  width: 25%;
+  height: 45%;
   background: url(../img/hero-bg.png) no-repeat bottom right/contain;
   z-index: 2;
 }
