@@ -96,7 +96,7 @@
                     
                     <div>
                         <input type="radio" name="question-3-answers" id="question-3-answers-B" value="B" />
-                        <label for="question-3-answers-B" class="fwrd labelb">b.  Server dapat melayani beberapa client pada saat yang sama dan mengatur pengaksesan resource.</label>
+                        <label for="question-3-answers-B" class="fwrd labelb">b.  Server dapat melayani beberapa client secara bersamaan & mengatur pengaksesan resource.</label>
                     </div>
                     
                     <div>
@@ -113,7 +113,7 @@
                 
                 <li>
                     <div class="quiz-overlay"></div>
-                    <h3>Yang bukan merupakan lapisan transport pada jaringan adalah . . .</h3>
+                    <h3>Yang bukan merupakan lapisan transport pada jaringan adalah ...</h3>
                     
                     <div class="mtm">
                         <input type="radio" name="question-4-answers" id="question-4-answers-A" value="A" />
@@ -139,7 +139,7 @@
                 
                 <li>
                     <div class="quiz-overlay"></div>
-                    <h3>Yang bukan merupakan pernyataan yang benar mengenai FTP Server adalah . . .</h3>
+                    <h3>Yang bukan merupakan pernyataan yang benar mengenai FTP Server adalah ...</h3>
                     
                     <div class="mtm">
                         <input type="radio" name="question-5-answers" id="question-5-answers-A" value="A" />
@@ -148,7 +148,7 @@
                     
                     <div>
                         <input type="radio" name="question-5-answers" id="question-5-answers-B" value="B" />
-                        <label for="question-5-answers-B" class="fwrd labelb">b.  Transmission Control Protocol (TCP) untuk komunikasi data antara klien dan server.</label>
+                        <label for="question-5-answers-B" class="fwrd labelb">b.  TCP untuk komunikasi data antara klien dan server.</label>
                     </div>
                     
                     <div>
@@ -158,7 +158,7 @@
                     
                     <div>
                         <input type="radio" name="question-5-answers" id="question-5-answers-D" value="D" />
-                        <label for="question-5-answers-D" class="fwrd labeld">d.  Antara Klien dan Server akan dibuatkan sebuah sesi komunikasi sebelum transfer  data dimulai.</label>
+                        <label for="question-5-answers-D" class="fwrd labeld">d.  Klien & Server dibuatkan sebuah sesi komunikasi sebelum transfer data dimulai.</label>
                     </div>
                     <p class="quiz-progress">5 of 5</p>
                 </li>
