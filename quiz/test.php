@@ -191,7 +191,7 @@
          * 
          */
         ?>
-    <script>
+    <!-- <script>
            (function($) {
               var timeout= null;
               var $mt = 0;
@@ -204,6 +204,18 @@
               });
            }(jQuery))
     </script>
+     --><script>
+        var $mt = 0;
+        window.onload = function timeout(){
+
+                setTimeout(function(){
+                    $mt = $mt - 430;
+                    $("#test-questions").css("margin-top", $mt); 
+                    timeout();
+                },5000)
+        };
+    </script>
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

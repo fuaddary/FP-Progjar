@@ -1,6 +1,7 @@
 import socket, select, sys, os, subprocess
 import ConfigParser
 from pathlib import Path
+from time import sleep
 
 config = ConfigParser.RawConfigParser()   
 config.read('httpserver.conf')
@@ -14,21 +15,21 @@ server_socket.bind(server_address)
 server_socket.listen(5)
 
 input_socket = [server_socket]
-list_dataset = []
 
 def kunci (post_string):
 	post_string = post_string.split("&")
 	score = 0
-	if post_string[0] == "question-1-answers=C":
-		score += 1
-	if post_string[1] == "question-2-answers=C":
-		score += 1
-	if post_string[2] == "question-3-answers=C":
-		score += 1
-	if post_string[3] == "question-4-answers=C":
-		score +=1
-	if post_string[4] == "question-5-answers=C":
-		score += 1
+	for elements in post_string:
+		if elements == "question-1-answers=C":
+			score += 1
+		elif elements == "question-2-answers=C":
+			score += 1
+		elif elements == "question-3-answers=C":
+			score += 1
+		elif elements == "question-4-answers=C":
+			score += 1
+		elif elements == "question-5-answers=C":
+			score += 1
 	return score
 
 print 'Serve at %s port %s'%server_address
@@ -118,6 +119,7 @@ try:
 						response_data = str(result)
 						content_length = len (response_data)
 						response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
+						sleep(3)
 						sock.sendall(response_header + response_data)
 
 
