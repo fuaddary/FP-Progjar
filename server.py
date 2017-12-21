@@ -2,6 +2,9 @@ import socket, select, sys, os, subprocess
 import ConfigParser
 from pathlib import Path
 from time import sleep
+import re
+
+
 
 config = ConfigParser.RawConfigParser()   
 config.read('httpserver.conf')
@@ -15,6 +18,17 @@ server_socket.bind(server_address)
 server_socket.listen(5)
 
 input_socket = [server_socket]
+
+
+# The function that receives the request
+def findcookie(request_header):
+    for elements in request_header:
+    	if "Cookie" in elements:
+			m = re.search('name=(.+?)>', elements)
+			if m:
+			    found = m.group(1)
+			    return found
+			# found: 1234
 
 def kunci (post_string):
 	post_string = post_string.split("&")
@@ -118,21 +132,23 @@ try:
 					elif "POST" in request_header[0]:
 						print "ini request post----------------------------------------"
 						if "test.php" in request_header[0]:
-							server_address = (request_header[-1])
-							print server_address
+							name = (request_header[-1])
 							response_data = '<meta http-equiv="refresh" content="0; url=http://10.151.36.137/quiz/test.php"/>'
 							content_length = len (response_data)
-							response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
+							response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\nSet-Cookie: <username>=<'+str(name)+'>' + '\r\n\r\n'
 						if "grade.php" in request_header[0]:
 							print "request post grade.php"
-							result.append([server_address,kunci(request_header[-1])])
+							cookie = findcookie(request_header)
+							print cookie
+							print "request_header--------------------------------------"
+							result.append([server_address,cookie,kunci(request_header[-1])])
 							print str(result)
 							response_data = str(result)
 							content_length = len (response_data)
 							response_header = 'HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Length:' +str(content_length) + '\r\n\r\n'
 							sleep(3)
+						print response_header
 						sock.sendall(response_header + response_data)
-
 
 except KeyboardInterrupt:
 	server_socket.close()
