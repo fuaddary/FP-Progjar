@@ -7,7 +7,7 @@ html {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0 auto;
-  width: 600px;
+  /* width: 600px; */
 }
 body { 
   background: #020305 url('../imgs/bg-texture.jpg') center center no-repeat;
@@ -17,7 +17,7 @@ body {
   max-width: 600px;
 }
 #page-wrap { 
-  height: 450px;
+  height: 606px;
   margin: 0 auto;
   overflow: hidden;
   position: relative;
@@ -174,19 +174,22 @@ h1 {
   transition: all linear .35s;
 }
 .quiz-overlay, .result {
-  height: 325px; /* 359px */
+  height: 359px; /* 359px */
   position: absolute;
   width: 552px;
   z-index: -1;
 }
 .index .quiz-overlay, .quiz-overlay { 
-  background: rgba(226,255,246,.52) url(../imgs/horns-up.png); 
+  /* background: rgba(226,255,246,.52) url(../imgs/horns-up.png);  */
+  background: rgba(226,255,246,.52);
   background-size: cover;
 }
 .index .quiz-overlay {
   left: 24px;
 }
-#quiz ul li div.quiz-overlay { margin: 0; }
+#quiz ul li div.quiz-overlay { 
+  margin: 0;
+}
 #quiz ul {
   list-style-type: none;
   margin-top: 0;
